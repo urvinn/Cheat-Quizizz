@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Quizizz Hack</title>
+  </head>
+  <body>
+  <div class="container-fluid bg-light py-3">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <div class="card text-center">
+          <div class="card-header">
+            Quizizz Hack
+          </div>
+          <div class="card-body">
+            <form id="form-code" action="" method="POST">
+              <h5 class="card-title">Input URL or PIN / CODE</h5>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">INPUT</span>
+                <input type="text" class="form-control" placeholder="input url or pin" aria-label="Pin" value="" aria-describedby="basic-addon1">
+              </div>
+            </form>
+            <button onclick="myFunction()" class="btn btn-primary" type="submit">Start</button>
+          </div>
+          <div class="card-footer text-muted">
+            Made by Tobz
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script>
+    function myFunction() {
+      var x = document.getElementById("form-code").elements[0].value;
+      fetch('https://tobzapi.herokuapp.com/api/quizizz?q=' + x)
+        .then(response => response.json())
+        .then(result => {
+          const arrLength = result.result.length
+          for(var i = 0; i < arrLength ; i++){
+            var divAnswer = document.createElement("div");
+            divAnswer.id = "answers";
+            var divContainer = document.createElement("div");
+            divContainer.className = "container-fluid bg-light py-3";
+            var divRow = document.createElement("div");
+            divRow.className = "row";
+            var divCol = document.createElement("div")
+            divCol.className = "col-md-6 mx-auto"
+            var card = document.createElement("div");
+            card.className = "card text-center";
+            card.style = "width: 18rem;";
+            var cardHeader = document.createElement("div");
+            cardHeader.className = "card-header";
+            cardHeader.innerText = "Question & Answer"
+            if (result.result[i].question?.image) {
+              var question = result.result[i].question.text
+              var newQuest = document.createElement("p");
+              newQuest.className = 'card-text';
+              newQuest.innerHTML = question;
+              for (let res_answer of result.result[i].answers) {
+                 if (res_answer.image) { 
+                  var newAnswer = document.createElement("div")
+                  newAnswer.className = "card-footer text-muted"
+                  newAnswer.innerHTML = res_answer.text
+                  newImg.className = "card-img-top";
+                  newImg.alt = "answers"
+                  newImg.src = res_answer.image
+                  var cardBody = document.createElement("div");
+                  cardBody.className = "card-body"
+                  cardBody.append(newQuest)
+                  card.append(cardHeader, newImg, cardBody, newAnswer)
+                  divCol.append(card)
+                  divRow.append(divCol)
+                  divContainer.append(divRow);  
+                  divAnswer.append(divContainer)
+                  document.body.appendChild(divAnswer); 
+                } else {
+                  var newAnswer = document.createElement("div")
+                  newAnswer.className = "card-footer text-muted"
+                  newAnswer.innerHTML = res_answer.text
+                  var cardBody = document.createElement("div");
+                  cardBody.className = "card-body"
+                  cardBody.append(newQuest)
+                  card.append(cardHeader, cardBody, newAnswer)
+                  divCol.append(card)
+                  divRow.append(divCol)
+                  divContainer.append(divRow);  
+                  divAnswer.append(divContainer)
+                  document.body.appendChild(divAnswer); 
+                }
+              }
+            } else {
+              var question = result.result[i].question.text
+              var newQuest = document.createElement("p");
+              newQuest.className = "card-text";
+              newQuest.innerHTML = question
+              for (let res_answer of result.result[i].answers) {
+                 if (res_answer.image) { 
+                  var newAnswer = document.createElement("div")
+                  newAnswer.className = "card-footer text-muted"
+                  newAnswer.innerHTML = res_answer.text
+                  var newImg = document.createElement("img");
+                  newImg.className = "card-img-top";
+                  newImg.alt = "answers"
+                  newImg.src = res_answer.image
+                  var cardBody = document.createElement("div");
+                  cardBody.className = "card-body"
+                  cardBody.append(newQuest)
+                  card.append(cardHeader, newImg, cardBody, newAnswer)
+                  divCol.append(card)
+                  divRow.append(divCol)
+                  divContainer.append(divRow);  
+                  divAnswer.append(divContainer)
+                  document.body.appendChild(divAnswer); 
+                } else {
+                  var newAnswer = document.createElement("div")
+                  newAnswer.className = "card-footer text-muted"
+                  newAnswer.innerHTML = res_answer.text
+                  var cardBody = document.createElement("div");
+                  cardBody.className = "card-body";
+                  cardBody.append(newQuest)
+                  card.append(cardHeader, cardBody, newAnswer)
+                  divCol.append(card)
+                  divRow.append(divCol)
+                  divContainer.append(divRow);  
+                  divAnswer.append(divContainer)
+                  document.body.appendChild(divAnswer); 
+                }
+              }
+            }
+          }
+        })
+      }
+  </script>
+  </body>
+</html>
